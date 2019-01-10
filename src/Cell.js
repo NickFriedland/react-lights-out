@@ -1,6 +1,5 @@
-import React, {Component} from 'react'
-import "./Cell.css"
-
+import React, { Component } from 'react';
+import './Cell.css';
 
 /** A single cell on the board.
  *
@@ -16,6 +15,10 @@ import "./Cell.css"
  **/
 
 class Cell extends Component {
+  static defaultProps = {
+    isLit: false
+  };
+
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
@@ -23,17 +26,15 @@ class Cell extends Component {
 
   handleClick(evt) {
     // call up to the board to flip cells around this cell
-    this.props.flipCellsAroundMe();
+    // Need to pass coords down here
+    this.props.flipCellsAroundMe(this.props.xCoord, this.props.yCoord);
   }
 
   render() {
-    let classes = "Cell" + (this.props.isLit ? " Cell-lit" : "");
+    let classes = 'Cell' + (this.props.isLit ? ' Cell-lit' : '');
 
-    return (
-        <td className={classes} onClick={this.handleClick} />
-    )
+    return <td className={classes} onClick={this.handleClick} />;
   }
 }
 
-
-export default Cell
+export default Cell;
